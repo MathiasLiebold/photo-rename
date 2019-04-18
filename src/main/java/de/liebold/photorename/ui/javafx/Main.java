@@ -1,4 +1,4 @@
-package de.liebold.imagerename.ui;
+package de.liebold.photorename.ui.javafx;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -11,13 +11,13 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import de.liebold.imagerename.logic.bean.FileInfo;
-import de.liebold.imagerename.logic.service.FileAnalyzer;
-import de.liebold.imagerename.logic.service.FileNameResolver;
-import de.liebold.imagerename.logic.service.FileResolver;
-import de.liebold.imagerename.ui.component.FileTableView;
-import de.liebold.imagerename.ui.component.StartButton;
-import de.liebold.imagerename.ui.component.SupportedFileInfo;
+import de.liebold.photorename.logic.bean.FileInfo;
+import de.liebold.photorename.logic.service.FileAnalyzer;
+import de.liebold.photorename.logic.service.FileNameResolver;
+import de.liebold.photorename.logic.service.FileResolver;
+import de.liebold.photorename.ui.javafx.component.FileTableView;
+import de.liebold.photorename.ui.javafx.component.StartButton;
+import de.liebold.photorename.ui.javafx.component.SupportedFileInfo;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -7,7 +7,7 @@ Features:
 - Setup versioning system and add project: -> SVN on NAS
 - GUI -> JavaFX
 - Build jar with maven
-- Spring dependancy injection
+- Spring dependency injection
 
 Ideas:
 - Test Coverage 100%

@@ -44,7 +44,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>de.liebold.imagerename.ui.Main</mainClass>
+							<mainClass>de.liebold.photorename.ui.javafx.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

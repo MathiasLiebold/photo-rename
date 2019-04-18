@@ -1,4 +1,4 @@
-package de.liebold.imagerename.logic.service;
+package de.liebold.photorename.logic.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.liebold.imagerename.logic.bean.FileInfo;
+import de.liebold.photorename.logic.bean.FileInfo;
 
 /**
  * Resolves file names, based on the file information, e.g. dates and previous

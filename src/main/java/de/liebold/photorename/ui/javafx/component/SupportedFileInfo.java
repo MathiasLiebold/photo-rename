@@ -1,10 +1,10 @@
-package de.liebold.imagerename.ui.component;
+package de.liebold.photorename.ui.javafx.component;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import de.liebold.imagerename.logic.service.FileResolver;
+import de.liebold.photorename.logic.service.FileResolver;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;

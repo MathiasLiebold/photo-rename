@@ -1,9 +1,8 @@
-package de.liebold.imagerename.logic.service;
+package de.liebold.photorename.logic.service;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.MatchResult;
 
 import org.springframework.stereotype.Service;
 

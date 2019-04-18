@@ -1,4 +1,4 @@
-package de.liebold.imagerename.logic.service;
+package de.liebold.photorename.logic.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +20,7 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
 
-import de.liebold.imagerename.logic.bean.FileInfo;
+import de.liebold.photorename.logic.bean.FileInfo;
 
 @Service(value = "fileAnalyzer")
 public class FileAnalyzer {

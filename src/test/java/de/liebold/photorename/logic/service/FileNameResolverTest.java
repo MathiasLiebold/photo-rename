@@ -1,4 +1,4 @@
-package de.liebold.imagerename.logic.service;
+package de.liebold.photorename.logic.service;
 
 import java.util.Optional;
 

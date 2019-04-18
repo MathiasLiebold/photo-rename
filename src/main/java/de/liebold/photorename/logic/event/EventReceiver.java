@@ -1,4 +1,4 @@
-package de.liebold.imagerename.logic.event;
+package de.liebold.photorename.logic.event;
 
 import java.util.Observable;
 import java.util.Observer;

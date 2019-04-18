@@ -1,4 +1,4 @@
-package de.liebold.imagerename.ui.component;
+package de.liebold.photorename.ui.javafx.component;
 
 import javafx.scene.Node;
 

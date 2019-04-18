@@ -1,4 +1,4 @@
-package de.liebold.imagerename.util;
+package de.liebold.photorename.util;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,9 +1,9 @@
-package de.liebold.imagerename.logic.event;
+package de.liebold.photorename.logic.event;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import de.liebold.imagerename.logic.bean.FileInfo;
+import de.liebold.photorename.logic.bean.FileInfo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

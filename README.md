@@ -12,7 +12,13 @@ Rename photos based on their date taken. Just drop all pictures of your camera, 
 
 # Build instructions
 Build with maven by executing the following command: "mvn clean package assembly:single".
+The result will be an executable jar in your repository e.g. "...\photo_renaming\target\imagerename-0.0.1-SNAPSHOT.jar"
 
-# Known issues to be addressed
-* Time of video files is not correct. 
+# Usage instructions
+1. Copy the jar into the directory with the photos.
+2. Double-click the jar.
+3. Click on "Start/Run".
+
+
+
 

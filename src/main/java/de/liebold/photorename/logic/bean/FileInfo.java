@@ -1,4 +1,4 @@
-package de.liebold.imagerename.logic.bean;
+package de.liebold.photorename.logic.bean;
 
 import lombok.Data;
 

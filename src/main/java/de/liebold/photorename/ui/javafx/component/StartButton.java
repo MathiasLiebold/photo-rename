@@ -1,10 +1,10 @@
-package de.liebold.imagerename.ui.component;
+package de.liebold.photorename.ui.javafx.component;
 
 import java.util.List;
 
-import de.liebold.imagerename.logic.bean.FileInfo;
-import de.liebold.imagerename.logic.event.StartEventHandler;
-import de.liebold.imagerename.logic.event.StartEventHandler.Status;
+import de.liebold.photorename.logic.bean.FileInfo;
+import de.liebold.photorename.logic.event.StartEventHandler;
+import de.liebold.photorename.logic.event.StartEventHandler.Status;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
