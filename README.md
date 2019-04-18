@@ -20,4 +20,4 @@ The result will be an executable jar in your repository e.g. "...\photo_renaming
 3. Click on "Start/Run".
 
 # Implementation details
-* Java 8, Maven, Spring Boot, Lombok, JavaFX
+* Java 8, [Maven](https://maven.apache.org/), [Spring Boot](https://spring.io/projects/spring-boot), [Project Lombok](https://projectlombok.org/), JavaFX, [metadata-extractor](https://github.com/drewnoakes/metadata-extractor)

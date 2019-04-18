@@ -8,3 +8,4 @@ Ideas:
 
 Known bugs to be addressed:
 - Video time is not correct
+- UI should run with separate (view)thread
