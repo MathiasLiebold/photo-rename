@@ -10,5 +10,4 @@
     <context:component-scan base-package="de.liebold.photorename" />
 
 	<context:annotation-config />
-
 </beans>
