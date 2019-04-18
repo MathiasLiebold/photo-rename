@@ -1,5 +1,7 @@
 package de.liebold.imagerename.logic.bean;
 
+import lombok.Data;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+@Data
 public class FileInfo implements Comparable<FileInfo> {
 
 	private Path originalPath;
@@ -20,33 +23,6 @@ public class FileInfo implements Comparable<FileInfo> {
 		this.originalName = originalPath.toFile().getName();
 	}
 
-	public Date getCreationTime() {
-		return creationTime;
-	}
-
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
-	}
-
-	public Date getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(Date lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
-
-	public Date getPhotoTime() {
-		return photoTime;
-	}
-
-	public void setPhotoTime(Date photoTime) {
-		// No validation of null required, photoTime may be null if information
-		// is not available.
-
-		this.photoTime = photoTime;
-	}
-
 	public Date getTime() {
 		if (photoTime != null) {
 			return photoTime;
@@ -58,17 +34,6 @@ public class FileInfo implements Comparable<FileInfo> {
 		return Collections.min(dates);
 	}
 
-	public String getOriginalName() {
-		return originalName;
-	}
-
-	public String getProposedName() {
-		return proposedName;
-	}
-
-	public void setProposedName(String proposedName) {
-		this.proposedName = proposedName;
-	}
 
 	public void move() {
 		File originalFile = originalPath.toFile();
@@ -80,7 +45,6 @@ public class FileInfo implements Comparable<FileInfo> {
 		}
 
 		originalFile.renameTo(newFile);
-
 	}
 
 	@Override

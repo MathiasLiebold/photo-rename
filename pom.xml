@@ -4,13 +4,12 @@
 	<groupId>imagerename</groupId>
 	<artifactId>imagerename</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<properties>
 		<junit.version>4.12</junit.version>
+		<lombok.version>1.18.6</lombok.version>
 		<metadata-extractor.version>2.10.1</metadata-extractor.version>
 		<springframework.version>4.3.18.RELEASE</springframework.version>
 	</properties>
-
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
@@ -21,7 +20,6 @@
 				<directory>src/main/conf</directory>
 			</resource>
 		</resources>
-		
 		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<testResources>
 			<testResource>
@@ -31,9 +29,7 @@
 				<directory>src/main/conf</directory>
 			</testResource>
 		</testResources>
-
 		<plugins>
-
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
@@ -42,7 +38,6 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -57,44 +52,40 @@
 					</descriptorRefs>
 				</configuration>
 			</plugin>
-
 		</plugins>
-
 	</build>
-
 	<dependencies>
-
-		<dependency>
-			<groupId>com.drewnoakes</groupId>
-			<artifactId>metadata-extractor</artifactId>
-			<version>${metadata-extractor.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.drewnoakes</groupId>
+			<artifactId>metadata-extractor</artifactId>
+			<version>${metadata-extractor.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
-
 </project>

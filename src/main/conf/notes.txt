@@ -12,3 +12,6 @@ Features:
 Ideas:
 - Test Coverage 100%
 - Use FX XML
+- findbugs
+- checkstyle
+- pmd
