@@ -3,6 +3,8 @@
 Rename photos based on their date taken. Just drop all photos of your camera, phone and WhatsApp into one directory and all photos are named and sorted accordingly with one click.
 
 # Renaming strategy
+Target naming pattern: "yyyy-MM-dd HH.mm.ss (Description).jpg"
+
 | Original name              | Date taken          | File created |  New file name              | Notes         |
 | ---------------------------| ------------------- | ------------ | --------------------------- | ------------- |
 | 1970-01-01 14.15.16 (Name) | 1970-01-01 14.15.16 | any          | 1970-01-01 14.15.16 (Name)  | Unchanged     |
@@ -12,7 +14,7 @@ Rename photos based on their date taken. Just drop all photos of your camera, ph
 
 # Build instructions
 Build with maven by executing the following command: "mvn clean package assembly:single".
-The result will be an executable jar in your repository e.g. "...\photo_renaming\target\imagerename-0.0.1-SNAPSHOT.jar"
+The result will be an executable jar in your repository e.g. "...\photo-rename\target\photo-rename-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
 
 # Usage instructions
 1. Copy the jar into the directory with the photos.
