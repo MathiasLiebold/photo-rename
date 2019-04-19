@@ -7,43 +7,55 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DateTextConverter {
 
-	private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss", Locale.GERMANY);
+    @Value("${photo-rename.dateTimePattern}")
+    private String dateTimePattern;
 
-	private DateTextConverter() {
-		dateTimeFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-	}
+    @Value("${photo-rename.dateTimeLocaleLanguage}")
+    private String dateTimeLocaleLanguage;
 
-	public String getText(Date date) {
-		if (date == null) {
-			return null;
-		}
+    @Value("${photo-rename.dateTimeLocaleCountry}")
+    private String dateTimeLocaleCountry;
+//    Locale locale = new Locale(dateTimeLocaleLanguage, dateTimeLocaleCountry);
 
-		return dateTimeFormat.format(date);
-	}
+    private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss", Locale.GERMANY);
 
-	public Date getDate(String text) {
-		if (text == null) {
-			return null;
-		}
+    private DateTextConverter() {
 
-		try {
-			return dateTimeFormat.parse(text);
-		} catch (ParseException e) {
-			return null;
-		}
-	}
+//        dateTimeFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
 
-	public Date getDate(FileTime fileTime) {
-		if (fileTime == null) {
-			return null;
-		}
+    public String getText(Date date) {
+        if (date == null) {
+            return null;
+        }
 
-		return new Date(fileTime.toMillis());
-	}
+        return dateTimeFormat.format(date);
+    }
+
+    public Date getDate(String text) {
+        if (text == null) {
+            return null;
+        }
+
+        try {
+            return dateTimeFormat.parse(text);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    public Date getDate(FileTime fileTime) {
+        if (fileTime == null) {
+            return null;
+        }
+
+        return new Date(fileTime.toMillis());
+    }
 
 }

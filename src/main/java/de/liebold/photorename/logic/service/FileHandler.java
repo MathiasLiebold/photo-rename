@@ -1,6 +1,6 @@
 package de.liebold.photorename.logic.service;
 
-import de.liebold.photorename.logic.bean.FileInfo;
+import de.liebold.photorename.logic.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,12 @@
 Ideas:
 - Test Coverage 100% -> Configure JaCoCo
-- Use XML for JavaFX instead of Java coding
 - Configure findbugs
 - Configure checkstyle
 - Configure pmd
 - Package structure by feature instead of layer/mixed
+- Use internationalization / language / bundle files to directly set the right texts in xml.
+- Rewrite conversion logic
+- Rewrite tests
 
 Known bugs to be addressed:
 - Video time is not correct
