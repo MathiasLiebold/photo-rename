@@ -13,8 +13,8 @@ Target naming pattern: "yyyy-MM-dd HH.mm.ss (Description).jpg"
 | IMG-20181221-WA0016        | any                 | any          | 2018-12-21 (WA0016)         | WhatsApp      |
 
 # Build instructions
-Build with maven by executing the following command: "mvn clean package assembly:single".
-The result will be an executable jar in your repository e.g. "...\photo-rename\target\photo-rename-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
+Build with maven by executing the following command: "mvn clean package".
+The result will be an executable jar in your repository e.g. "...\photo-rename\target\photo-rename-0.0.1-SNAPSHOT.jar"
 
 # Usage instructions
 1. Copy the jar into the directory with the photos.

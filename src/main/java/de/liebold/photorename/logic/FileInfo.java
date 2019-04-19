@@ -1,4 +1,4 @@
-package de.liebold.photorename.logic.bean;
+package de.liebold.photorename.logic;
 
 import lombok.Data;
 
@@ -34,23 +34,6 @@ public class FileInfo implements Comparable<FileInfo> {
         dates.add(creationTime);
         dates.add(lastModifiedTime);
         return Collections.min(dates);
-    }
-
-    public void move() {
-        File originalFile = originalPath.toFile();
-
-        // TODO random name for target dir
-
-        File targetDir = new File(originalFile.getParentFile().getAbsolutePath() + File.separatorChar + "target");
-        File newFile = new File(targetDir.getAbsolutePath() + File.separatorChar + proposedName);
-
-        if (!targetDir.exists()) {
-            targetDir.mkdirs();
-        }
-
-        // TODO move back from target dir
-
-        originalFile.renameTo(newFile);
     }
 
     @Override
