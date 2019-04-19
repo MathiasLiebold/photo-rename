@@ -12,53 +12,59 @@ import java.util.List;
 @Data
 public class FileInfo implements Comparable<FileInfo> {
 
-	private Path originalPath;
-	private String originalName;
-	private String proposedName;
+    private Path originalPath;
+    private String originalName;
+    private String proposedName;
 
-	private Date creationTime, lastModifiedTime, photoTime;
+    private Date creationTime;
+    private Date lastModifiedTime;
+    private Date photoTime;
 
-	public FileInfo(Path originalPath) {
-		this.originalPath = originalPath;
-		this.originalName = originalPath.toFile().getName();
-	}
+    public FileInfo(Path originalPath) {
+        this.originalPath = originalPath;
+        originalName = originalPath.toFile().getName();
+    }
 
-	public Date getTime() {
-		if (photoTime != null) {
-			return photoTime;
-		}
+    public Date getTime() {
+        if (photoTime != null) {
+            return photoTime;
+        }
 
-		List<Date> dates = new ArrayList<>();
-		dates.add(creationTime);
-		dates.add(lastModifiedTime);
-		return Collections.min(dates);
-	}
+        List<Date> dates = new ArrayList<>();
+        dates.add(creationTime);
+        dates.add(lastModifiedTime);
+        return Collections.min(dates);
+    }
 
+    public void move() {
+        File originalFile = originalPath.toFile();
 
-	public void move() {
-		File originalFile = originalPath.toFile();
-		File targetDir = new File(originalFile.getParentFile().getAbsolutePath() + File.separatorChar + "target");
-		File newFile = new File(targetDir.getAbsolutePath() + File.separatorChar + proposedName);
+        // TODO random name for target dir
 
-		if (!targetDir.exists()) {
-			targetDir.mkdirs();
-		}
+        File targetDir = new File(originalFile.getParentFile().getAbsolutePath() + File.separatorChar + "target");
+        File newFile = new File(targetDir.getAbsolutePath() + File.separatorChar + proposedName);
 
-		originalFile.renameTo(newFile);
-	}
+        if (!targetDir.exists()) {
+            targetDir.mkdirs();
+        }
 
-	@Override
-	public String toString() {
-		return originalName;
-	}
+        // TODO move back from target dir
 
-	@Override
-	public int compareTo(FileInfo o) {
-		if (o == null) {
-			return 1;
-		}
+        originalFile.renameTo(newFile);
+    }
 
-		return this.getTime().compareTo(o.getTime());
-	}
+    @Override
+    public String toString() {
+        return originalName;
+    }
+
+    @Override
+    public int compareTo(FileInfo o) {
+        if (o == null) {
+            return 1;
+        }
+
+        return getTime().compareTo(o.getTime());
+    }
 
 }
