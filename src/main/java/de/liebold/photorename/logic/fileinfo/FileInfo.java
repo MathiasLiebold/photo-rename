@@ -1,8 +1,7 @@
-package de.liebold.photorename.logic;
+package de.liebold.photorename.logic.fileinfo;
 
 import lombok.Data;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,11 +12,15 @@ import java.util.List;
 public class FileInfo implements Comparable<FileInfo> {
 
     private Path originalPath;
+
     private String originalName;
+
     private String proposedName;
 
     private Date creationTime;
+
     private Date lastModifiedTime;
+
     private Date photoTime;
 
     public FileInfo(Path originalPath) {

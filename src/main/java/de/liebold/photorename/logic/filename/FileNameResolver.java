@@ -1,4 +1,4 @@
-package de.liebold.photorename.logic.service;
+package de.liebold.photorename.logic.filename;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import de.liebold.photorename.logic.datetext.DateTextConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.liebold.photorename.logic.FileInfo;
+import de.liebold.photorename.logic.fileinfo.FileInfo;
 
 /**
  * Resolves file names, based on the file information, e.g. dates and previous
@@ -70,7 +71,7 @@ public class FileNameResolver {
         result.append(fileNameAnalyzer.getDescriptionInBrackets(fileInfo.getOriginalName()));
         result.append(")");
         result.append(".");
-        result.append(fileNameAnalyzer.getFileEnding(fileInfo.getOriginalName()));
+        result.append(fileNameAnalyzer.getFileEndingUpperCase(fileInfo.getOriginalName()));
 
         String proposedName = result.toString();
 

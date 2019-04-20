@@ -2,11 +2,11 @@ package de.liebold.photorename.logic.service;
 
 import static org.junit.Assert.assertEquals;
 
+import de.liebold.photorename.logic.filename.FileNameAnalyzer;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @Ignore
@@ -75,12 +75,12 @@ public class FileNameAnalyzerTest {
 
     @Test
     public void getLowerCaseFileSuffix_StandardName_Works() {
-        assertEquals("jpg", fileNameAnalyzer.getLowerCaseFileSuffix("AnyPicture.JPg"));
+        assertEquals("jpg", fileNameAnalyzer.getUpperCaseFileSuffix("AnyPicture.JPg"));
     }
 
     @Test
     public void getLowerCaseFileSuffix_NameContainsDots_Works() {
-        assertEquals("jpg", fileNameAnalyzer.getLowerCaseFileSuffix("Any.Picture.JPg"));
+        assertEquals("jpg", fileNameAnalyzer.getUpperCaseFileSuffix("Any.Picture.JPg"));
     }
 
 }

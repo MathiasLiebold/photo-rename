@@ -1,4 +1,10 @@
-package de.liebold.photorename.logic.service;
+package de.liebold.photorename.logic.fileinfo;
+
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,26 +18,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.ExifSubIFDDirectory;
-
-import de.liebold.photorename.logic.FileInfo;
-
-@Service(value = "fileAnalyzer")
-public class FileAnalyzer {
-
-    private static final Logger LOG = Logger.getLogger(FileAnalyzer.class.getName());
-
-    @Autowired
-    private DateTextConverter dateTextConverter;
-
-    @Autowired
-    private FileResolver fileResolver;
+@Service
+public class FileInfoCreator {
+    private static final Logger LOG = Logger.getLogger(FileInfoCreator.class.getName());
 
     private Path path;
 
@@ -40,18 +29,11 @@ public class FileAnalyzer {
     public FileInfo analyze(URL resource) {
         initialize(resource);
 
-        if (!fileResolver.isValid(path)) {
-            return null;
-        }
-
         return runAnalysis();
     }
 
     private void initialize(URL resource) {
         try {
-            if (resource == null) {
-                return;
-            }
             path = Paths.get(resource.toURI());
             attrs = Files.readAttributes(path, BasicFileAttributes.class);
         } catch (URISyntaxException | IOException e) {
@@ -63,9 +45,9 @@ public class FileAnalyzer {
     private FileInfo runAnalysis() {
         FileInfo fileInfo = new FileInfo(path);
 
-        fileInfo.setCreationTime(dateTextConverter.getDate(attrs.creationTime()));
-        fileInfo.setLastModifiedTime(dateTextConverter.getDate(attrs.lastModifiedTime()));
-        fileInfo.setPhotoTime(getPhotoTime());
+        fileInfo.setCreationTime(new Date(attrs.creationTime().toMillis()));
+        fileInfo.setLastModifiedTime(new Date(attrs.lastModifiedTime().toMillis()));
+        fileInfo.setPhotoTime(extractPhotoTime());
 
         return fileInfo;
     }
@@ -73,7 +55,7 @@ public class FileAnalyzer {
     /**
      * @see https://drewnoakes.com/code/exif/
      */
-    public Date getPhotoTime() {
+    private Date extractPhotoTime() {
         Date result = null;
         InputStream inputStream = null;
         try {

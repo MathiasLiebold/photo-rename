@@ -6,13 +6,14 @@ import static org.junit.Assert.assertNull;
 import java.io.IOException;
 import java.net.URL;
 
+import de.liebold.photorename.logic.fileinfo.FileInfoCreator;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.liebold.photorename.logic.FileInfo;
+import de.liebold.photorename.logic.fileinfo.FileInfo;
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,24 +21,24 @@ import de.liebold.photorename.logic.FileInfo;
 public class FileAnalyzerTest {
 
     @Autowired
-    private FileAnalyzer fileAnalyzer;
+    private FileInfoCreator fileInfoCreator;
 
     @Test
     public void analyze_NonMedia_ReturnsNull() {
         URL resource = getUrl("/99_Textfile.txt");
 
-        assertNull(fileAnalyzer.analyze(resource));
+        assertNull(fileInfoCreator.analyze(resource));
     }
 
     // @Test(expected = NullPointerException.class)
     // public void analyze_NullInput_ThrowsException() {
-    // fileAnalyzer.analyze(null);
+    // fileInfoCreator.analyze(null);
     // }
 
     @Test
     public void analyze_JPG_Works() throws IOException {
         URL resource = getUrl("/01_Photo.jpg");
-        FileInfo fileInfo = fileAnalyzer.analyze(resource);
+        FileInfo fileInfo = fileInfoCreator.analyze(resource);
 
         assertNotNull(fileInfo);
         assertNotNull(fileInfo.getCreationTime());
@@ -49,7 +50,7 @@ public class FileAnalyzerTest {
     @Test
     public void analyze_RW2_Works() throws IOException {
         URL resource = getUrl("/01_Photo.rw2");
-        FileInfo fileInfo = fileAnalyzer.analyze(resource);
+        FileInfo fileInfo = fileInfoCreator.analyze(resource);
 
         assertNotNull(fileInfo);
         assertNotNull(fileInfo.getCreationTime());
@@ -60,7 +61,7 @@ public class FileAnalyzerTest {
     @Test
     public void analyze_MediaWithoutPhotoTime_Works() throws IOException {
         URL resource = getUrl("/02_PhotoWithoutPhotoTime.jpg");
-        FileInfo fileInfo = fileAnalyzer.analyze(resource);
+        FileInfo fileInfo = fileInfoCreator.analyze(resource);
 
         assertNotNull(fileInfo);
         assertNotNull(fileInfo.getCreationTime());
