@@ -1,7 +1,7 @@
 package de.liebold.photorename.ui.javafx;
 
-import de.liebold.photorename.logic.FileInfo;
-import de.liebold.photorename.logic.service.FileService;
+import de.liebold.photorename.logic.fileinfo.FileInfo;
+import de.liebold.photorename.logic.FileService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

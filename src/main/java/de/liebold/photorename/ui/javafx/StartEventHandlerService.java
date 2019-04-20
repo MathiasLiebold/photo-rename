@@ -1,7 +1,6 @@
 package de.liebold.photorename.ui.javafx;
 
-import de.liebold.photorename.logic.FileInfo;
-import de.liebold.photorename.logic.service.FileService;
+import de.liebold.photorename.logic.FileService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
