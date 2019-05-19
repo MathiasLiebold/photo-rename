@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MainController {
+public class FileOverviewController {
 
     @Autowired
     private FileService fileService;
 
     @Autowired
-    private StartEventHandlerService startEventHandler2;
+    private StartRenamingEventHandler startRenamingEventHandler;
 
     @Value("${application.description}")
     private String applicationDescription;
@@ -36,20 +36,29 @@ public class MainController {
     @FXML
     private Button startButton;
 
+    // TODO document how this method is called
     public void initialize() {
+        initializeLabels();
+        initializeFileOverview();
+        initializeControls();
+    }
+
+    private void initializeLabels() {
         descriptionLabel.setText(applicationDescription);
-
         instructionsLabel.setText(photoRenameInstructions);
-
         directoryLabel.setText(fileService.getCurrentDirectoryPath().toUri().toString());
 
         String fileEndingsCommaSeparated = String.join(", ", fileService.getSupportedFileEndings());
         fileEndingsLabel.setText(fileEndingsCommaSeparated);
+    }
 
-        ObservableList<FileInfo> observableList = FXCollections.observableArrayList(fileService.getSourceFiles());
+    private void initializeFileOverview() {
+        ObservableList<FileInfo> observableList = FXCollections.observableArrayList(fileService.getFileInfos());
         fileTableView.setItems(observableList);
+    }
 
-        startButton.setOnAction(startEventHandler2);
+    private void initializeControls() {
+        startButton.setOnAction(startRenamingEventHandler);
     }
 
 }

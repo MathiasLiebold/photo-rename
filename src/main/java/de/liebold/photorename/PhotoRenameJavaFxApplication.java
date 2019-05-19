@@ -1,6 +1,8 @@
 package de.liebold.photorename;
 
+import de.liebold.photorename.ui.javafx.ErrorHandler;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -11,6 +13,8 @@ import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import java.io.IOException;
 
 @SpringBootApplication
 public class PhotoRenameJavaFxApplication extends Application {
@@ -31,30 +35,46 @@ public class PhotoRenameJavaFxApplication extends Application {
 
     @Override
     public void init() throws Exception {
+        context = prepareSpringContext();
+        rootNode = prepareRootNode(context);
+    }
+
+    private ConfigurableApplicationContext prepareSpringContext() {
         SpringApplicationBuilder builder = new SpringApplicationBuilder(PhotoRenameJavaFxApplication.class);
-        context = builder.run(getParameters().getRaw().toArray(new String[0]));
+        return builder.run(getParameters().getRaw().toArray(new String[0]));
+    }
 
-        applicationName = context.getEnvironment().getProperty("application.name");
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/fxml/main.fxml"));
+    private Parent prepareRootNode(ConfigurableApplicationContext context) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/fxml/fileOverview.fxml"));
         loader.setControllerFactory(context::getBean);
-        rootNode = loader.load();
+        return loader.load();
     }
 
     @Override
     public void start(Stage primaryStage) {
+        Thread.setDefaultUncaughtExceptionHandler(new ErrorHandler());
+
+        applicationName = context.getEnvironment().getProperty("application.name");
+        primaryStage.setTitle(applicationName);
+
+        Scene scene = preparePrimaryScene();
+        primaryStage.setScene(scene);
+
+        primaryStage.centerOnScreen();
+        primaryStage.getIcons().add(new Image("/ui/img/icon_500x500.png"));
+
+        primaryStage.show();
+    }
+
+    private Scene preparePrimaryScene() {
         Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
         double width = visualBounds.getWidth() - SCREEN_PADDING;
         double height = visualBounds.getHeight() - SCREEN_PADDING;
 
         Scene scene = new Scene(rootNode, width, height);
         scene.getStylesheets().add("/ui/css/" + context.getEnvironment().getProperty("photo-rename.ui.theme"));
-        primaryStage.setScene(scene);
 
-        primaryStage.centerOnScreen();
-        primaryStage.setTitle(applicationName);
-        primaryStage.getIcons().add(new Image("/ui/img/icon_500x500.png"));
-        primaryStage.show();
+        return scene;
     }
 
     @Override

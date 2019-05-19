@@ -11,7 +11,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
-            fx:controller="de.liebold.photorename.ui.javafx.MainController">
+            fx:controller="de.liebold.photorename.ui.javafx.FileOverviewController">
 
     <VBox>
         <padding>

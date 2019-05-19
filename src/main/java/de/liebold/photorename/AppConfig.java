@@ -12,7 +12,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackages = {"de.liebold.photorename.*"})
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class CustomConfiguration {
+public class AppConfig {
 
     /**
      * To resolve ${} in @Value

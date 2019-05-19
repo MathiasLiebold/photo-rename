@@ -75,12 +75,12 @@ public class FileNameAnalyzerTest {
 
     @Test
     public void getLowerCaseFileSuffix_StandardName_Works() {
-        assertEquals("jpg", fileNameAnalyzer.getUpperCaseFileSuffix("AnyPicture.JPg"));
+        assertEquals("jpg", fileNameAnalyzer.getFileEndingLowerCase("AnyPicture.JPg"));
     }
 
     @Test
     public void getLowerCaseFileSuffix_NameContainsDots_Works() {
-        assertEquals("jpg", fileNameAnalyzer.getUpperCaseFileSuffix("Any.Picture.JPg"));
+        assertEquals("jpg", fileNameAnalyzer.getFileEndingLowerCase("Any.Picture.JPg"));
     }
 
 }

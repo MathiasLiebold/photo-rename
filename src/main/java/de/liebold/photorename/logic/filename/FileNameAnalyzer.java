@@ -1,5 +1,6 @@
 package de.liebold.photorename.logic.filename;
 
+import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,16 +28,12 @@ public class FileNameAnalyzer {
         return "";
     }
 
-    public String getUpperCaseFileSuffix(String fileName) {
-        Optional.of(fileName);
-
-        Matcher matcher = getMatcher(FILE_NAME_GENERIC_PATTERN, fileName);
-
-        if (matcher == null || !matcher.matches()) {
-            return "";
-        }
-
-        return matcher.group(1).toUpperCase();
+    /**
+     * Gets the suffix / ending of the file without the dot. An input of
+     * "AnyFile.jpg" will return "jpg".
+     */
+    public String getFileEndingLowerCase(String fileName) {
+        return getFileEndingUpperCase(fileName).toLowerCase(Locale.US);
     }
 
     /**
@@ -46,7 +43,7 @@ public class FileNameAnalyzer {
     public String getFileEndingUpperCase(String fileName) {
         Optional.of(fileName);
 
-        return fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length()).toUpperCase();
+        return fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length()).toUpperCase(Locale.US);
     }
 
     private Matcher getMatcher(Pattern pattern, String fileName) {

@@ -1,7 +1,7 @@
 package de.liebold.photorename.logic;
 
 import de.liebold.photorename.logic.fileinfo.FileInfo;
-import de.liebold.photorename.logic.fileinfo.FileInfoCreator;
+import de.liebold.photorename.logic.fileinfo.FileInfoExtractor;
 import de.liebold.photorename.logic.filename.FileNameAnalyzer;
 import de.liebold.photorename.logic.filename.FileNameResolver;
 import lombok.Getter;
@@ -33,7 +33,7 @@ public class FileService {
     private FileNameResolver fileNameResolver;
 
     @Autowired
-    private FileInfoCreator fileInfoCreator;
+    private FileInfoExtractor fileInfoExtractor;
 
     @Value("#{'${photo-rename.file.image.endings}'.split(',')}")
     private List<String> imageFileEndings;
@@ -44,7 +44,6 @@ public class FileService {
     @Value("#{'${photo-rename.file.video.endings}'.split(',')}")
     private List<String> videoFileEndings;
 
-    // Initialized in PostConstruct
     @Getter
     private List<String> supportedFileEndings;
 
@@ -60,30 +59,31 @@ public class FileService {
         return Paths.get(".");
     }
 
-    public List<FileInfo> getSourceFiles() {
-        List<FileInfo> result = new ArrayList<>();
+    public List<FileInfo> getFileInfos() {
+        List<URL> urls = getAllMediaFilesFromDirectory(".");
 
-        for (URL url : getFromCurrentDirectory()) {
+        List<FileInfo> fileInfoWithoutNameProposal = analyzeAndPrepareFileInfos(urls);
+
+        List<FileInfo> fileInfosWithNameProposal = fileNameResolver.proposeNewNames(fileInfoWithoutNameProposal);
+
+        return fileInfosWithNameProposal;
+    }
+
+    private List<FileInfo> analyzeAndPrepareFileInfos(List<URL> urls) {
+        List<FileInfo> fileInfos = new ArrayList<>(urls.size());
+        for (URL url : urls) {
             if (isValid(url.toString())) {
-                FileInfo fileInfo = fileInfoCreator.analyze(url);
+                FileInfo fileInfo = fileInfoExtractor.extractFileInfo(url);
                 if (fileInfo != null) {
-                    result.add(fileInfo);
+                    fileInfos.add(fileInfo);
                 }
             }
         }
-
-        fileNameResolver.proposeNames(result);
-
-        return fileNameResolver.getModified();
-    }
-
-    public boolean isValid(String filePathOrUrl) {
-        return supportedFileEndings.stream()
-                .anyMatch(fileNameAnalyzer.getFileEndingUpperCase(filePathOrUrl.toUpperCase())::equalsIgnoreCase);
+        return fileInfos;
     }
 
     public void renameSourceFiles() {
-        for (FileInfo fileInfo : getSourceFiles()) {
+        for (FileInfo fileInfo : getFileInfos()) {
 
             if (DUMMY_FILE_NOT_TO_BE_RENAMED.equals(fileInfo.getOriginalName())) {
                 throw new IllegalStateException("Dummy file may not be renamed. " + DUMMY_FILE_NOT_TO_BE_RENAMED);
@@ -106,13 +106,13 @@ public class FileService {
         }
     }
 
-    public List<URL> getFromCurrentDirectory() {
+    public List<URL> getAllMediaFilesFromDirectory(String directory) {
 
         List<URL> result = new LinkedList<>();
 
         Iterator<Path> it = null;
         try {
-            it = Files.list(Paths.get(".")).iterator();
+            it = Files.list(Paths.get(directory)).iterator();
         } catch (IOException e) {
             LOG.severe(e.getMessage());
         }
@@ -129,6 +129,11 @@ public class FileService {
         }
 
         return result;
+    }
+
+    public boolean isValid(String filePathOrUrl) {
+        return supportedFileEndings.stream()
+                .anyMatch(fileNameAnalyzer.getFileEndingUpperCase(filePathOrUrl.toUpperCase())::equalsIgnoreCase);
     }
 
 }

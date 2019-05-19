@@ -8,18 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StartEventHandlerService implements EventHandler<ActionEvent> {
+public class StartRenamingEventHandler implements EventHandler<ActionEvent> {
 
     @Autowired
     private FileService fileService;
 
     @Override
     public void handle(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        button.setDisable(true);
+        throw new IllegalStateException("blubb3");
 
-        fileService.renameSourceFiles();
-
-        button.setText("Done");
+//        Button button = (Button) event.getSource();
+//        button.setDisable(true);
+//
+//        fileService.renameSourceFiles();
+//
+//        button.setText("Done");
     }
 }

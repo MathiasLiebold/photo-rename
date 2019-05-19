@@ -28,9 +28,10 @@ public class FileNameResolver {
     @Autowired
     private FileNameAnalyzer fileNameAnalyzer;
 
-    private Map<String, FileInfo> proposedNames = new HashMap<>();
+    private Map<String, FileInfo> proposedNames;
 
-    public void proposeNames(List<FileInfo> fileInfos) {
+    public List<FileInfo> proposeNewNames(List<FileInfo> fileInfos) {
+        proposedNames = new HashMap<>();
 
         List<FileInfo> sortedFileInfos = fileInfos;
         Collections.sort(sortedFileInfos);
@@ -45,13 +46,9 @@ public class FileNameResolver {
             FileInfo f = proposedNames.get(m);
             f.setProposedName(m);
         }
-    }
 
-    public List<FileInfo> getModified() {
         List<FileInfo> result = new ArrayList<>();
-
         result.addAll(proposedNames.values());
-
         return result;
     }
 
@@ -71,7 +68,7 @@ public class FileNameResolver {
         result.append(fileNameAnalyzer.getDescriptionInBrackets(fileInfo.getOriginalName()));
         result.append(")");
         result.append(".");
-        result.append(fileNameAnalyzer.getFileEndingUpperCase(fileInfo.getOriginalName()));
+        result.append(fileNameAnalyzer.getFileEndingLowerCase(fileInfo.getOriginalName()));
 
         String proposedName = result.toString();
 
